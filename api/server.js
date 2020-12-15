@@ -18,16 +18,15 @@ const config = {
     secure: false,
     httpOnly: true,
   },
-  resave: false, // we might need to set this to true to avoid idle sessions being deleted
-  saveUninitialized: false, // keep it false to avoid storing sessions and sending cookies for unmodified sessions
+  resave: false,
+  saveUninitialized: false,
 
-  // to persist sessions to db so they don't die on server reloads
   store: new KnexSessionStore({
-    knex: require("../database/connection.js"), // configured instance of knex
-    tablename: "sessions", // table that will store sessions inside the db, name it anything you want
-    sidfieldname: "sid", // column that will hold the session id, name it anything you want
-    createtable: true, // if the table does not exist, it will create it automatically
-    clearInterval: 1000 * 60 * 60, // time it takes to check for old sessions and remove them from the database to keep it clean and performant
+    knex: require("../database/connection.js"),
+    tablename: "sessions",
+    sidfieldname: "sid",
+    createtable: true,
+    clearInterval: 1000 * 60 * 60,
   }),
 };
 
